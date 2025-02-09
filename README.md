@@ -1,24 +1,40 @@
-# README
+# Sistema de Controle de Estudos Bíblicos e Visitas
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Este é um sistema para controle de estudos bíblicos e visitas, desenvolvido com Ruby on Rails.
 
-Things you may want to cover:
+## Tecnologias Utilizadas
 
-* Ruby version
+- Ruby 3.2.2
+- Ruby on Rails 7.1.5
 
-* System dependencies
+## Funcionalidades
 
-* Configuration
+- Cadastro de membros
+- Agendamento de visitas
+- Registro de estudos bíblicos
+- Relatórios de visitas e estudos
 
-* Database creation
+## Instalação
 
-* Database initialization
+1. Clone o repositório:
+    ```sh
+    git clone https://github.com/seu-usuario/seu-repositorio.git
+    ```
+2. Navegue até o diretório do projeto:
+    ```sh
+    cd seu-repositorio
+    ```
+3. Instale as dependências:
+    ```sh
+    bundle install
+    ```
+4. Configure o banco de dados:
+    ```sh
+    rails db:setup
+    ```
 
-* How to run the test suite
+## Uso
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Para iniciar o servidor, execute:
+```sh
+rails server
