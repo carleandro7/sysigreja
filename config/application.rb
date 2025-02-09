@@ -31,7 +31,7 @@ module Sysigreja
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
     config.time_zone = 'Brasilia'
-    Audited.current_user_method = :authenticated_user_or_aluno
+    Audited.current_user_method = :authenticated_user
 
     config.active_record.use_yaml_unsafe_load = true
       

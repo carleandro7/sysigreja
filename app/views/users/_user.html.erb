@@ -1,22 +1,24 @@
-<div id="<%= dom_id user %>">
-  <p>
-    <strong>Nome:</strong>
-    <%= user.nome %>
-  </p>
+<div class="row">
+  <div class="col-lg-6 form-group">
+    <label class='control-label'>Nome</label>
+    <input readonly="true" class='form-control' value="<%= @user.nome %>" />
+  </div>
+  <div class="col-lg-6 form-group">
+    <label class='control-label'>Email</label>
+    <input readonly="true" class='form-control' value="<%= @user.email %>" />
+  </div>
+</div>
 
-  <p>
-    <strong>Tipo:</strong>
-    <%= user.tipo %>
-  </p>
-
-  <p>
-    <strong>Telefone:</strong>
-    <%= user.telefone %>
-  </p>
-
-  <p>
-    <strong>Igreja:</strong>
-    <%= user.igreja_id %>
-  </p>
+<div class="row">
+  <div class="col-lg-4 form-group">
+    <label class='control-label'><%= t 'activerecord.attributes.user.tipo' %></label>
+    <input readonly="true" class='form-control' value="<%= list_tipo_usuario_invertida[@user.tipo] %>" />
+  </div>
+  <div class="col-lg-4 form-group">
+    <label class='control-label'><%= t 'activerecord.attributes.user.instituica' %></label>
+    <input readonly="true" class='form-control' value="<%= @user.instituica.nome %>" />
+  </div>
 
 </div>
+
+

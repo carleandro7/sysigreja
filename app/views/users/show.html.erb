@@ -1,10 +1,21 @@
-<p style="color: green"><%= notice %></p>
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-lg-12">
+          <h2 class="page-header">
+              Usuário
+          </h2>
+      </div>
+  </div>
 
-<%= render @user %>
 
-<div>
-  <%= link_to "Edit this user", edit_user_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
+  <%= render @user %>
 
-  <%= button_to "Destroy this user", @user, method: :delete %>
+  <div class="row">
+    <div class="col-lg-3 form-group">
+      <%= link_to 'Alterar', edit_user_path(@user), :class => "btn btn-primary colorprimarybtn" %>
+     </div>
+    <div class="col-lg-3 form-group">      
+      <%= link_to 'Voltar',  users_path, :class => "btn btn-primary colorprimarybtn"%>
+    </div>
+  </div>
 </div>

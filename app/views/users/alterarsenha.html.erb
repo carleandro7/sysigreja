@@ -1,0 +1,49 @@
+<h1>Alterar Senha</h1>
+
+<div class="bairro form">
+<%= form_with(model: @user, local: true) do |form| %>
+
+
+
+  <div class="row">
+      <div class="col-lg-6 form-group">   
+          <%= form.label :nome, :class => 'control-label' %>
+          <%= form.text_field :nome, id: :user_nome, :class => 'form-control', :disabled => true %>
+      </div>
+      <div class="col-lg-6 form-group">   
+        <%= form.label :email, :class => 'control-label' %>
+        <%= form.text_field :email, id: :user_email, :class => 'form-control', :disabled => true %>
+      </div>
+  </div>
+  <div class="row">
+     <div class="col-lg-5 form-group">   
+        <%= form.label :password, :class => 'control-label' %>
+        <%= form.password_field :password,  autocomplete: "off", id: "password-field", :class => 'form-control', :minlength=>6, 
+        :maxlength=>50, :required =>true %>
+         <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+      </div>
+  </div>
+
+  <div class="row">
+                <div class="col-lg-3 form-group">  
+                  <input type="submit" name="commit" class="btn btn-primary colorprimarybtn2" value="Salvar" data-disable-with="Salvar" />
+                </div>
+            </div>
+
+<% end %>
+</div>
+
+
+<script type="text/javascript">
+  /* imagem password */
+$(".toggle-password").click(function() {
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+</script>

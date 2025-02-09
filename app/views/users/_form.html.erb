@@ -1,37 +1,54 @@
-<%= form_with(model: user) do |form| %>
-  <% if user.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+
+<div class="user form">
+  <%= form_with(model: user, local: true) do |form| %>
+    <% if user.errors.any? %>
+      <div id="error_explanation" class="panel panel-danger mensagem-erro-cabecalho">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= pluralize(user.errors.count, "erro(s)") %> ao salvar:</h3>
+        </div>
+        <div class="panel-body">
+          <ul>
+            <% user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-lg-6 form-group">   
+        <%= form.label :nome, class: 'control-label required' %>
+        <%= form.text_field :nome, id: :user_nome, class: 'form-control' %>
+      </div>
+      <div class="col-lg-4 form-group">   
+        <%= form.label :email, class: 'control-label required' %>
+        <%= form.text_field :email, class: 'form-control' %>
+      </div>
+      <div class="col-lg-3 form-group">   
+          <%= form.label :password,:class => 'control-label required' %>
+          <%= form.password_field :password,  autocomplete: "off", id: "password-field", :class => 'form-control', :min=>6 %>
+        </div>
+        <div class="col-lg-3 form-group">   
+           <%= form.label :tipo, :class => 'control-label required' %>
+           <%= form.select :tipo, list_tipo_usuario, {include_blank: "Selecionar"}, {class: "form-control", required: true, id: "tipo_select" } %>
+       </div>
+       <div class="col-lg-6 form-group">   
+           <%= form.label :instituica_id, :class => 'control-label required' %>
+           <%= form.collection_select :instituica_id, listInstituicasAll, :id, :nome, {:prompt => 'Selecionar', :required=>true}, :class => 'form-control' %>  
+       </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-lg-3 form-group">  
+        <%= form.submit "Salvar", class: "btn btn-primary colorprimarybtn", data: { disable_with: "Salvando" } %>
+      </div>
+      <div class="col-lg-3 form-group">      
+        <%= link_to 'Voltar', users_path, class: "btn btn-primary colorprimarybtn" %>
+      </div>
     </div>
   <% end %>
+</div>
 
-  <div>
-    <%= form.label :nome, style: "display: block" %>
-    <%= form.text_field :nome %>
-  </div>
-
-  <div>
-    <%= form.label :tipo, style: "display: block" %>
-    <%= form.number_field :tipo %>
-  </div>
-
-  <div>
-    <%= form.label :telefone, style: "display: block" %>
-    <%= form.text_field :telefone %>
-  </div>
-
-  <div>
-    <%= form.label :igreja_id, style: "display: block" %>
-    <%= form.text_field :igreja_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
