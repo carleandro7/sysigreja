@@ -1,14 +1,60 @@
-<p style="color: green"><%= notice %></p>
+<div class="visitaigrejas index">
+  <h2>Visitas da Igreja</h2>
+  
+  <div class="row">
+    <div class="col-lg-12">
+      <%= form_with url: visitaigrejas_path, method: :get, local: true do %>
+        <div class="row">
+          <div class="col-lg-5 form-group">
+            <%= text_field_tag :nome, params[:nome], class: "form-control", placeholder: "Pesquisar por nome ou matricula" %>
+          </div>
+           <div class="col-lg-6  form-group">  
+              <select id="codigreja" name="codigreja" class="form-control" required>
+                  <option value="" disabled selected hidden >Igrejas</option>
+                  <% listIgrejasAll.each do |igreja| %>
+                    <option value="<%= igreja.id %>" <% if params[:codigreja] == igreja.id.to_s %> selected <% end %> > <%= igreja.nome %></option>
+                  <% end %>         
+              </select> 
+          </div> 
+          <div class="col-lg-2 form-group">
+            <%= submit_tag "Pesquisar", class: "btn btn-primary colorprimarybtn" %>
+          </div>
+          <div class="col-lg-2 form-group">
+            <%= link_to "Novo visitaigreja", new_visitaigreja_path, class: "btn btn-primary colorprimarybtn" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
-<h1>Visitaigrejas</h1>
+  <div class="table-responsive">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th>COD</th>
+          <th>Nome</th>
+          <th>telefone</th>
+          <th>Instituição</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @visitaigrejas.each do |visitaigreja| %>
+          <tr>
+            <td><%= visitaigreja.id %></td>
+            <td><%= visitaigreja.nome %></td>
+            <td><%= visitaigreja.telefone %></td>
+            <td><%= visitaigreja.igreja.nome %></td>
+            <td>
+              <%= link_to "Visualizar", visitaigreja_path(visitaigreja), class: "btn btn-info btn-sm" %>
+              <%= link_to "Editar", edit_visitaigreja_path(visitaigreja), class: "btn btn-warning btn-sm" %>
+              <%= link_to "Excluir", visitaigreja_path(visitaigreja),method: :delete,remote: true, data: { turbo_method: :delete, turbo_confirm: "Tem certeza?" }, class: "btn btn-danger btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<div id="visitaigrejas">
-  <% @visitaigrejas.each do |visitaigreja| %>
-    <%= render visitaigreja %>
-    <p>
-      <%= link_to "Show this visitaigreja", visitaigreja %>
-    </p>
-  <% end %>
+  <%= paginate @visitaigrejas %>
 </div>
-
-<%= link_to "New visitaigreja", new_visitaigreja_path %>

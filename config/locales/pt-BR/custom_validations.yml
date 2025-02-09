@@ -22,4 +22,10 @@ pt-BR:
         tipo: "Tipo de Usuário"
         igreja_id: "Igreja"
         igreja: "Igreja"
-         
+      visitaigreja:
+        whatsapp_telefone: "Telefone é Whatsapp"
+        observacao: "Observação"
+        cep: "CEP"
+        igreja_id: "Igreja"
+        igreja: "Igreja"
+  

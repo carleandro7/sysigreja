@@ -1,72 +1,47 @@
-<div id="<%= dom_id visitaigreja %>">
-  <p>
-    <strong>Nome:</strong>
-    <%= visitaigreja.nome %>
-  </p>
 
-  <p>
-    <strong>Apelido:</strong>
-    <%= visitaigreja.apelido %>
-  </p>
 
-  <p>
-    <strong>Telefone:</strong>
-    <%= visitaigreja.telefone %>
-  </p>
 
-  <p>
-    <strong>Whatsapp telefone:</strong>
-    <%= visitaigreja.whatsapp_telefone %>
-  </p>
-
-  <p>
-    <strong>Cep:</strong>
-    <%= visitaigreja.cep %>
-  </p>
-
-  <p>
-    <strong>Logradouro:</strong>
-    <%= visitaigreja.logradouro %>
-  </p>
-
-  <p>
-    <strong>Numero:</strong>
-    <%= visitaigreja.numero %>
-  </p>
-
-  <p>
-    <strong>Bairro:</strong>
-    <%= visitaigreja.bairro %>
-  </p>
-
-  <p>
-    <strong>Cidade:</strong>
-    <%= visitaigreja.cidade %>
-  </p>
-
-  <p>
-    <strong>Estado:</strong>
-    <%= visitaigreja.estado %>
-  </p>
-
-  <p>
-    <strong>Latitude:</strong>
-    <%= visitaigreja.latitude %>
-  </p>
-
-  <p>
-    <strong>Longitude:</strong>
-    <%= visitaigreja.longitude %>
-  </p>
-
-  <p>
-    <strong>Observacao:</strong>
-    <%= visitaigreja.observacao %>
-  </p>
-
-  <p>
-    <strong>Igreja:</strong>
-    <%= visitaigreja.igreja_id %>
-  </p>
-
+<div class="row">
+      <div class="col-lg-6 form-group">
+        <label class='control-label'><%= t 'activerecord.attributes.visitaigreja.nome' %></label>
+        <input readonly="true" class='form-control' value="<%= @visitaigreja.nome %>" />
+      </div>
+      <div class="col-lg-3 form-group">
+        <label class='control-label'><%= t 'activerecord.attributes.visitaigreja.telefone' %></label>
+        <input readonly="true" class='form-control' value="<%= @visitaigreja.telefone %>" />
+      </div>
+      <div class="col-lg-2 form-group">
+        <label class='control-label'><%= t 'activerecord.attributes.visitaigreja.whatsapp_telefone' %></label>
+        <input readonly="true" class='form-control' value="<%= list_opcoes_invertida[@visitaigreja.whatsapp_telefone] %>" />
+      </div>
+    
+    <div class="col-lg-2 form-group">
+      <label class='control-label'><%= t 'activerecord.attributes.visitaigreja.cep' %></label>
+      <input readonly="true" class='form-control' value="<%= @visitaigreja.cep %>" />
+    </div>
+    <div class="col-lg-5 form-group">
+      <label class='control-label'><%= t 'activerecord.attributes.visitaigreja.logradouro' %></label>
+      <input readonly="true" class='form-control' value="<%= @visitaigreja.logradouro %>" />
+    </div>
+    <div class="col-lg-2 form-group">
+      <label class='control-label'><%= t 'activerecord.attributes.visitaigreja.numero' %></label>
+      <input readonly="true" class='form-control' value="<%= @visitaigreja.numero %>" />
+    </div>
+    <div class="col-lg-4 form-group">
+      <label class='control-label'><%= t 'activerecord.attributes.visitaigreja.bairro' %></label>
+      <input readonly="true" class='form-control' value="<%= @visitaigreja.bairro %>" />
+    </div>
+    <div class="col-lg-5 form-group">
+      <label class='control-label'><%= t 'activerecord.attributes.visitaigreja.cidade' %></label>
+      <input readonly="true" class='form-control' value="<%= @visitaigreja.cidade %>" />
+    </div>
+    <div class="col-lg-2 form-group">
+      <label class='control-label'><%= t 'activerecord.attributes.visitaigreja.estado' %></label>
+      <input readonly="true" class='form-control' value="<%= @visitaigreja.estado %>" />
+    </div>
+    <div class="col-lg-4 form-group">
+      <label class='control-label'><%= t 'activerecord.attributes.visitaigreja.igreja' %></label>
+      <input readonly="true" class='form-control' value="<%= @visitaigreja.igreja.nome %>" />
+    </div>
+  </div>
 </div>

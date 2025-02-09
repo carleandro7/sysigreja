@@ -3,7 +3,12 @@ class VisitaigrejasController < ApplicationController
 
   # GET /visitaigrejas or /visitaigrejas.json
   def index
-    @visitaigrejas = Visitaigreja.all
+    if params[:nome] == nil
+      @visitaigrejas = Visitaigreja.all.order("visitaigrejas.nome ASC").page(params[:page]).per(20)
+    else
+      @visitaigrejas = Visitaigreja.all
+      .where("visitaigrejas.nome ILIKE  '%#{params[:nome].strip}%' AND visitaigrejas.igreja_id = #{params[:codigreja]}").order("visitaigrejas.nome ASC").page(params[:page]).per(20)
+    end
   end
 
   # GET /visitaigrejas/1 or /visitaigrejas/1.json
@@ -25,7 +30,7 @@ class VisitaigrejasController < ApplicationController
 
     respond_to do |format|
       if @visitaigreja.save
-        format.html { redirect_to @visitaigreja, notice: "Visitaigreja was successfully created." }
+        format.html { redirect_to @visitaigreja, notice: mensagem_usuario("salvo")}
         format.json { render :show, status: :created, location: @visitaigreja }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +43,7 @@ class VisitaigrejasController < ApplicationController
   def update
     respond_to do |format|
       if @visitaigreja.update(visitaigreja_params)
-        format.html { redirect_to @visitaigreja, notice: "Visitaigreja was successfully updated." }
+        format.html { redirect_to @visitaigreja, notice: mensagem_usuario("alterado")}
         format.json { render :show, status: :ok, location: @visitaigreja }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +57,7 @@ class VisitaigrejasController < ApplicationController
     @visitaigreja.destroy!
 
     respond_to do |format|
-      format.html { redirect_to visitaigrejas_path, status: :see_other, notice: "Visitaigreja was successfully destroyed." }
+      format.html { redirect_to visitaigrejas_path, status: :see_other, notice: mensagem_usuario("excluido") }
       format.json { head :no_content }
     end
   end

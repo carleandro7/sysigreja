@@ -52,5 +52,46 @@ module ApplicationHelper
         list = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
         return list[valor-1]
     end
+
+    def list_estados
+      @list_estado =  
+      [ 
+      ["AC","AC"],
+      ["AL","AL"],
+      ["AP","AP"],
+      ["AM","AM"],
+      ["BA","BA"],
+      ["CE","CE"],
+      ["ES","ES"],
+      ["GO","GO"],
+      ["MA","MA"],
+      ["MT","MT"],
+      ["MS","MS"],
+      ["MG","MG"],
+      ["PA","PA"],
+      ["PB","PB"],
+      ["PR","PR"],
+      ["PE","PE"],
+      ["PI","PI"],
+      ["RJ","RJ"],
+      ["RN","RN"],
+      ["RS","RS"],
+      ["RO","RO"],
+      ["RR","RR"],
+      ["SC","SC"],
+      ["SP","SP"],
+      ["SE","SE"],
+      ["TO","TO"],
+      ["DF","DF"]]
+  end
+
+  def list_genero
+      @list_genero =  
+      [ 
+      ["Feminino","Feminino"],
+      ["Masculino","Masculino"],
+      ["Outro","Outro"]]
+  end
+
 end
 

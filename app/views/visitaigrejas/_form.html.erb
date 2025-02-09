@@ -1,87 +1,73 @@
-<%= form_with(model: visitaigreja) do |form| %>
-  <% if visitaigreja.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(visitaigreja.errors.count, "error") %> prohibited this visitaigreja from being saved:</h2>
 
-      <ul>
-        <% visitaigreja.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+
+
+<div class="visitaigreja form">
+  <%= form_with(model: visitaigreja, local: true) do |form| %>
+    <% if visitaigreja.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(visitaigreja.errors.count, "erro") %> ao salvar:</h4>
+        <ul>
+          <% visitaigreja.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-lg-6 form-group">
+        <%= form.label :nome, class: "control-label required" %>
+        <%= form.text_field :nome, class: "form-control", required: true %>
+      </div>
+      <div class="col-lg-3 form-group">
+        <%= form.label :telefone, class: "control-label required" %>
+        <%= form.text_field :telefone, class: "form-control", required: true, :onkeypress=>"mask(this, mphone);", :onblur=>"mask(this, mphone);" %>
+      </div>
+       <div class="col-lg-2 form-group">
+        <%= form.label :whatsapp_telefone, class: "control-label required" %>
+        <%= form.select :whatsapp_telefone, list_opcoes, { include_blank: "Selecionar" }, { class: "form-control", required: true } %>
+      </div>
+       <div class="col-lg-2 form-group">
+        <%= form.label :cep, class: "control-label" %>
+        <%= form.text_field :cep, class: "form-control", :onkeypress=>"mask_cep(this, mcep);", :onblur=>"mask_cep(this, mcep);" %>
+      </div>
+      <div class="col-lg-5 form-group">
+        <%= form.label :logradouro,  class: "control-label" %>
+        <%= form.text_field :logradouro, class: "form-control" %>
+      </div>
+      <div class="col-lg-2 form-group">
+        <%= form.label :numero,  class: "control-label" %>
+        <%= form.text_field :numero, class: "form-control" %>
+      </div>
+      <div class="col-lg-4 form-group">
+        <%= form.label :bairro, class: "control-label" %>
+        <%= form.text_field :bairro, class: "form-control" %>
+      </div>
+     
+      <div class="col-lg-5 form-group">
+        <%= form.label :cidade, class: "control-label required" %>
+        <%= form.text_field :cidade, class: "form-control" %>
+      </div>
+      <div class="col-lg-2 form-group">
+        <%= form.label :estado, class: "control-label required" %>
+        <%= form.select :estado, list_estados, { include_blank: "Selecionar" }, { class: "form-control" } %>
+      </div>
+      <div class="col-lg-5 form-group">
+        <%= form.label :igreja_id, class: "control-label required" %>
+        <%= form.collection_select :igreja_id, listIgrejasAll.all, :id, :nome, { prompt: "Selecionar" }, { class: "form-control", required: true } %>
+      </div>
+
+
+    </div>
+
+
+    <div class="row">
+      <div class="col-lg-2 form-group">
+        <%= form.submit "Salvar", class: "btn btn-info colorprimarybtn" %>
+      </div>
+      <div class="col-lg-2 form-group">
+        <%= link_to "Voltar", visitaigrejas_path, class: "btn btn-info colorprimarybtn" %>
+      </div>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :nome, style: "display: block" %>
-    <%= form.text_field :nome %>
-  </div>
-
-  <div>
-    <%= form.label :apelido, style: "display: block" %>
-    <%= form.text_field :apelido %>
-  </div>
-
-  <div>
-    <%= form.label :telefone, style: "display: block" %>
-    <%= form.text_field :telefone %>
-  </div>
-
-  <div>
-    <%= form.label :whatsapp_telefone, style: "display: block" %>
-    <%= form.number_field :whatsapp_telefone %>
-  </div>
-
-  <div>
-    <%= form.label :cep, style: "display: block" %>
-    <%= form.text_field :cep %>
-  </div>
-
-  <div>
-    <%= form.label :logradouro, style: "display: block" %>
-    <%= form.text_field :logradouro %>
-  </div>
-
-  <div>
-    <%= form.label :numero, style: "display: block" %>
-    <%= form.text_field :numero %>
-  </div>
-
-  <div>
-    <%= form.label :bairro, style: "display: block" %>
-    <%= form.text_field :bairro %>
-  </div>
-
-  <div>
-    <%= form.label :cidade, style: "display: block" %>
-    <%= form.text_field :cidade %>
-  </div>
-
-  <div>
-    <%= form.label :estado, style: "display: block" %>
-    <%= form.text_field :estado %>
-  </div>
-
-  <div>
-    <%= form.label :latitude, style: "display: block" %>
-    <%= form.text_field :latitude %>
-  </div>
-
-  <div>
-    <%= form.label :longitude, style: "display: block" %>
-    <%= form.text_field :longitude %>
-  </div>
-
-  <div>
-    <%= form.label :observacao, style: "display: block" %>
-    <%= form.text_area :observacao %>
-  </div>
-
-  <div>
-    <%= form.label :igreja_id, style: "display: block" %>
-    <%= form.text_field :igreja_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
