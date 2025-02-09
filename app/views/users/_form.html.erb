@@ -22,6 +22,14 @@
         <%= form.label :nome, class: 'control-label required' %>
         <%= form.text_field :nome, id: :user_nome, class: 'form-control' %>
       </div>
+      <div class="col-lg-3 form-group">   
+        <%= form.label :telefone, class: 'control-label required' %>
+        <%= form.text_field :telefone, class: 'form-control' %>
+      </div>
+       <div class="col-lg-3 form-group">   
+           <%= form.label :tipo, :class => 'control-label required' %>
+           <%= form.select :tipo, list_tipo_usuario, {include_blank: "Selecionar"}, {class: "form-control", required: true, id: "tipo_select" } %>
+       </div>
       <div class="col-lg-4 form-group">   
         <%= form.label :email, class: 'control-label required' %>
         <%= form.text_field :email, class: 'form-control' %>
@@ -30,13 +38,10 @@
           <%= form.label :password,:class => 'control-label required' %>
           <%= form.password_field :password,  autocomplete: "off", id: "password-field", :class => 'form-control', :min=>6 %>
         </div>
-        <div class="col-lg-3 form-group">   
-           <%= form.label :tipo, :class => 'control-label required' %>
-           <%= form.select :tipo, list_tipo_usuario, {include_blank: "Selecionar"}, {class: "form-control", required: true, id: "tipo_select" } %>
-       </div>
-       <div class="col-lg-6 form-group">   
-           <%= form.label :instituica_id, :class => 'control-label required' %>
-           <%= form.collection_select :instituica_id, listInstituicasAll, :id, :nome, {:prompt => 'Selecionar', :required=>true}, :class => 'form-control' %>  
+       
+       <div class="col-lg-5 form-group">   
+           <%= form.label :igreja_id, :class => 'control-label required' %>
+           <%= form.collection_select :igreja_id, listIgrejasAll, :id, :nome, {:prompt => 'Selecionar', :required=>true}, :class => 'form-control' %>  
        </div>
     </div>
 

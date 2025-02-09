@@ -47,7 +47,6 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
-    @user.instituica_id = current_user.instituica_id
     respond_to do |format|
       if @user.save
         format.html { redirect_to user_url(@user), notice: mensagem_usuario("salvo")  }

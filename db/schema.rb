@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_09_164326) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_09_172345) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,7 +45,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_09_164326) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "visita", force: :cascade do |t|
+  create_table "visitaigrejas", force: :cascade do |t|
     t.string "nome"
     t.string "apelido"
     t.string "telefone"
@@ -58,13 +58,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_09_164326) do
     t.string "estado"
     t.string "latitude"
     t.string "longitude"
+    t.text "observacao"
     t.bigint "igreja_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["igreja_id"], name: "index_visita_on_igreja_id"
+    t.index ["igreja_id"], name: "index_visitaigrejas_on_igreja_id"
   end
 
   add_foreign_key "igrejas", "distritos"
   add_foreign_key "users", "igrejas"
-  add_foreign_key "visita", "igrejas"
+  add_foreign_key "visitaigrejas", "igrejas"
 end

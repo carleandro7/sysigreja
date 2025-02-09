@@ -1,6 +1,6 @@
-class CreateVisita < ActiveRecord::Migration[7.1]
+class CreateVisitaigrejas < ActiveRecord::Migration[7.1]
   def change
-    create_table :visita do |t|
+    create_table :visitaigrejas do |t|
       t.string :nome
       t.string :apelido
       t.string :telefone
@@ -13,6 +13,7 @@ class CreateVisita < ActiveRecord::Migration[7.1]
       t.string :estado
       t.string :latitude
       t.string :longitude
+      t.text :observacao
       t.references :igreja, null: false, foreign_key: true
 
       t.timestamps

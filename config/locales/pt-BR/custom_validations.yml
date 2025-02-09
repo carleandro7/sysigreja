@@ -20,4 +20,6 @@ pt-BR:
       user:
         password: "Senha"
         tipo: "Tipo de Usuário"
+        igreja_id: "Igreja"
+        igreja: "Igreja"
          

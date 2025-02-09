@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :visitaigrejas
   devise_for :users , 
   controllers: { 
     sessions: 'users/sessions',
@@ -16,7 +17,6 @@ Rails.application.routes.draw do
   root to: "users#menu"
   
 
-  resources :visita
   resources :users, :path => "users" do
     collection do
       get "/ajuda" => "users#ajuda", :as => "ajuda"

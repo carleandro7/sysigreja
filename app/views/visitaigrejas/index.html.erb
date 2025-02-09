@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Visitaigrejas</h1>
+
+<div id="visitaigrejas">
+  <% @visitaigrejas.each do |visitaigreja| %>
+    <%= render visitaigreja %>
+    <p>
+      <%= link_to "Show this visitaigreja", visitaigreja %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New visitaigreja", new_visitaigreja_path %>
