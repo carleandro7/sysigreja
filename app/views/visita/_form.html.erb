@@ -1,0 +1,82 @@
+<%= form_with(model: visitum) do |form| %>
+  <% if visitum.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(visitum.errors.count, "error") %> prohibited this visitum from being saved:</h2>
+
+      <ul>
+        <% visitum.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :nome, style: "display: block" %>
+    <%= form.text_field :nome %>
+  </div>
+
+  <div>
+    <%= form.label :apelido, style: "display: block" %>
+    <%= form.text_field :apelido %>
+  </div>
+
+  <div>
+    <%= form.label :telefone, style: "display: block" %>
+    <%= form.text_field :telefone %>
+  </div>
+
+  <div>
+    <%= form.label :whatsapp_telefone, style: "display: block" %>
+    <%= form.number_field :whatsapp_telefone %>
+  </div>
+
+  <div>
+    <%= form.label :cep, style: "display: block" %>
+    <%= form.text_field :cep %>
+  </div>
+
+  <div>
+    <%= form.label :logradouro, style: "display: block" %>
+    <%= form.text_field :logradouro %>
+  </div>
+
+  <div>
+    <%= form.label :numero, style: "display: block" %>
+    <%= form.text_field :numero %>
+  </div>
+
+  <div>
+    <%= form.label :bairro, style: "display: block" %>
+    <%= form.text_field :bairro %>
+  </div>
+
+  <div>
+    <%= form.label :cidade, style: "display: block" %>
+    <%= form.text_field :cidade %>
+  </div>
+
+  <div>
+    <%= form.label :estado, style: "display: block" %>
+    <%= form.text_field :estado %>
+  </div>
+
+  <div>
+    <%= form.label :latitude, style: "display: block" %>
+    <%= form.text_field :latitude %>
+  </div>
+
+  <div>
+    <%= form.label :longitude, style: "display: block" %>
+    <%= form.text_field :longitude %>
+  </div>
+
+  <div>
+    <%= form.label :igreja_id, style: "display: block" %>
+    <%= form.text_field :igreja_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

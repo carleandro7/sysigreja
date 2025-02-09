@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Igrejas</h1>
+
+<div id="igrejas">
+  <% @igrejas.each do |igreja| %>
+    <%= render igreja %>
+    <p>
+      <%= link_to "Show this igreja", igreja %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New igreja", new_igreja_path %>

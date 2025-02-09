@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @distrito %>
+
+<div>
+  <%= link_to "Edit this distrito", edit_distrito_path(@distrito) %> |
+  <%= link_to "Back to distritos", distritos_path %>
+
+  <%= button_to "Destroy this distrito", @distrito, method: :delete %>
+</div>
