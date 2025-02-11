@@ -1,5 +1,5 @@
 module DistritosHelper
   def listDistritosAll
-    @distritos = Distrito.all
+    @distritos = Distrito.all.order(:nome)
   end
 end

@@ -1,37 +1,45 @@
-<%= form_with(model: visitouigreja) do |form| %>
-  <% if visitouigreja.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(visitouigreja.errors.count, "error") %> prohibited this visitouigreja from being saved:</h2>
 
-      <ul>
-        <% visitouigreja.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+
+<div class="visitouigreja form">
+  <%= form_with(model: visitouigreja, local: true) do |form| %>
+    <% if visitouigreja.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(visitouigreja.errors.count, "erro") %> ao salvar:</h4>
+        <ul>
+          <% visitouigreja.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-lg-5 form-group">
+        <%= form.label :igreja_id, class: "control-label required" %>
+        <%= form.collection_select :igreja_id, listIgrejasAll.all, :id, :nome, { prompt: "Selecionar" }, { class: "form-control", required: true } %>
+      </div>
+      <div class="col-lg-7 form-group">
+        <%= form.label :visitaigreja_id, class: "control-label required" %>
+        <%= form.collection_select :visitaigreja_id, listVisitaigrejasAll.all, :id, :nome, { prompt: "Selecionar" }, { class: "form-control", required: true } %>
+      </div>
+      <div class="col-lg-3 form-group">
+        <%= form.label :data, class: "control-label required" %>
+        <%= form.date_field :data, class: "form-control", required: true %>
+      </div>
+      <div class="col-lg-8 form-group">   
+           <%= form.label :descricao, :class => 'control-label ' %>
+           <%= form.text_field :descricao,  :class => 'form-control' %>
+       </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-lg-2 form-group">
+        <%= form.submit "Salvar", class: "btn btn-info colorprimarybtn" %>
+      </div>
+      <div class="col-lg-2 form-group">
+        <%= link_to "Voltar", visitouigrejas_path, class: "btn btn-info colorprimarybtn" %>
+      </div>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :igreja_id, style: "display: block" %>
-    <%= form.text_field :igreja_id %>
-  </div>
-
-  <div>
-    <%= form.label :visitaigreja_id, style: "display: block" %>
-    <%= form.text_field :visitaigreja_id %>
-  </div>
-
-  <div>
-    <%= form.label :data, style: "display: block" %>
-    <%= form.date_field :data %>
-  </div>
-
-  <div>
-    <%= form.label :descricao, style: "display: block" %>
-    <%= form.text_field :descricao %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

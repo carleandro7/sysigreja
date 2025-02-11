@@ -3,7 +3,12 @@ class VisitouigrejasController < ApplicationController
 
   # GET /visitouigrejas or /visitouigrejas.json
   def index
-    @visitouigrejas = Visitouigreja.all
+    if params[:nome] == nil
+      @visitouigrejas = Visitouigreja.all.joins(:visitaigreja).order("visitaigrejas.nome ASC").page(params[:page]).per(20)
+    else
+      @visitouigrejas = Visitouigreja.all.joins(:visitaigreja)
+      .where("visitaigrejas.nome ILIKE  '%#{params[:nome].strip}%' AND visitouigrejas.igreja_id = #{params[:codigreja]}").order("visitaigrejas.nome ASC").page(params[:page]).per(20)
+    end
   end
 
   # GET /visitouigrejas/1 or /visitouigrejas/1.json
@@ -25,7 +30,7 @@ class VisitouigrejasController < ApplicationController
 
     respond_to do |format|
       if @visitouigreja.save
-        format.html { redirect_to @visitouigreja, notice: "Visitouigreja was successfully created." }
+        format.html { redirect_to @visitouigreja, notice:  mensagem_usuario("salvo") }
         format.json { render :show, status: :created, location: @visitouigreja }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +43,7 @@ class VisitouigrejasController < ApplicationController
   def update
     respond_to do |format|
       if @visitouigreja.update(visitouigreja_params)
-        format.html { redirect_to @visitouigreja, notice: "Visitouigreja was successfully updated." }
+        format.html { redirect_to @visitouigreja, notice: mensagem_usuario("alterado") }
         format.json { render :show, status: :ok, location: @visitouigreja }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +57,7 @@ class VisitouigrejasController < ApplicationController
     @visitouigreja.destroy!
 
     respond_to do |format|
-      format.html { redirect_to visitouigrejas_path, status: :see_other, notice: "Visitouigreja was successfully destroyed." }
+      format.html { redirect_to visitouigrejas_path, status: :see_other, notice: mensagem_usuario("excluido")}
       format.json { head :no_content }
     end
   end

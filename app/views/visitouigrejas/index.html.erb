@@ -1,14 +1,62 @@
-<p style="color: green"><%= notice %></p>
 
-<h1>Visitouigrejas</h1>
 
-<div id="visitouigrejas">
-  <% @visitouigrejas.each do |visitouigreja| %>
-    <%= render visitouigreja %>
-    <p>
-      <%= link_to "Show this visitouigreja", visitouigreja %>
-    </p>
-  <% end %>
+<div class="categdespesas index">
+      <h2>Registros de Visitas </h2>
+    <%= form_tag visitouigrejas_path( format:"html"), :method => 'get' do %>  
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+              <div class="col-lg-5  form-group">  
+                <%= text_field_tag :nome, params[:nome], :class => 'form-control', :placeholder=>"Digite o nome para pesquisar" %>  
+              </div>
+              <div class="col-lg-5  form-group">  
+              <select id="codigreja" name="codigreja" class="form-control" required>
+                  <option value="" disabled selected hidden >Igrejas</option>
+                  <% listIgrejasAll.each do |igreja| %>
+                    <option value="<%= igreja.id %>" <% if params[:codigreja] == igreja.id.to_s %> selected <% end %> > <%= igreja.nome %></option>
+                  <% end %>         
+              </select> 
+            </div> 
+              <div class="col-lg-2 form-group">
+                <%= submit_tag "Pesquisar", :class => "btn btn-primary colorprimarybtn" %>
+              </div>
+            
+              <div class="col-lg-2 form-group">  
+                  <span class="input-group-btn" style="display: inline-block;"><button class="btn btn-primary colorprimarybtn" type="button" onclick="javascript: location.href='<%= new_visitouigreja_path %>';"><i class="fa fa-plus-circle"></i> Nova Visita</button></span>
+            </div>
+        </div>
+      </div>
+    </div>
+  <% end  %>  
+ 
+  <div class="table-responsive">
+  <table class="table table-hover table-striped" cellpadding="0" cellspacing="0">
+      <thead>
+      <tr>
+      <th>COD</th>
+      <th>Nome</th>
+      <th>Igreja</th>
+      <th>Data</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @visitouigrejas.each do |visitouigreja| %>
+      <tr>
+        <td><%= "%06d"%visitouigreja.id %></td>
+        <td><%= visitouigreja.visitaigreja.nome %></td>
+        <td><%= visitouigreja.igreja.nome %></td>
+        <td><%= visitouigreja.data.strftime("%d/%m/%Y") %></td>
+        <td><%= link_to 'Visualizar', visitouigreja %></td>
+        <td><%= link_to 'Alterar', edit_visitouigreja_path(visitouigreja) %></td>   
+        <td><%= link_to 'Excluir', visitouigreja, class: 'remove-tag', data: { turbo_method: :delete, turbo_confirm: 'Deseja excluir o Registro de Visita?' } %></td>
+      </tr>
+    <% end %>
+      </tbody>
+  </table>
 </div>
 
-<%= link_to "New visitouigreja", new_visitouigreja_path %>
+<%= paginate @visitouigrejas %>
+
+</div>

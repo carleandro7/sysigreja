@@ -28,4 +28,10 @@ pt-BR:
         cep: "CEP"
         igreja_id: "Igreja"
         igreja: "Igreja"
+      visitouigreja:
+        igreja_id: "Igreja"
+        igreja: "Igreja"
+        visitaigreja_id: "Visita"
+        visitaigreja: "Visita"
+        descricao: "Descrição"
   

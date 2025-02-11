@@ -1,22 +1,24 @@
-<div id="<%= dom_id visitouigreja %>">
-  <p>
-    <strong>Igreja:</strong>
-    <%= visitouigreja.igreja_id %>
-  </p>
 
-  <p>
-    <strong>Visitaigreja:</strong>
-    <%= visitouigreja.visitaigreja_id %>
-  </p>
 
-  <p>
-    <strong>Data:</strong>
-    <%= visitouigreja.data %>
-  </p>
 
-  <p>
-    <strong>Descricao:</strong>
-    <%= visitouigreja.descricao %>
-  </p>
+<div class="row">
+      
+      <div class="col-lg-5 form-group">
+        <label class='control-label'><%= t 'activerecord.attributes.visitouigreja.igreja' %></label>
+        <input readonly="true" class='form-control' value="<%= @visitouigreja.igreja.nome %>" />
+      </div>
+      <div class="col-lg-7 form-group">
+        <label class='control-label'><%= t 'activerecord.attributes.visitouigreja.visitaigreja' %></label>
+        <input readonly="true" class='form-control' value="<%= @visitouigreja.visitaigreja.nome %>" />
+      </div>
+      <div class="col-lg-3 form-group">
+        <label class='control-label'><%= t 'activerecord.attributes.visitouigreja.data' %></label>
+        <input readonly="true" class='form-control' value="<%= @visitouigreja.data.strftime("%d/%m/%Y") %>" />
+      </div>
+    
+    <div class="col-lg-8 form-group">
+      <label class='control-label'><%= t 'activerecord.attributes.visitouigreja.descricao' %></label>
+      <input readonly="true" class='form-control' value="<%= @visitouigreja.descricao %>" />
+    </div>
+  </div>
 
-</div>

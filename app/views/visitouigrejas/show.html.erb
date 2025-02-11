@@ -1,10 +1,23 @@
-<p style="color: green"><%= notice %></p>
+
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-lg-12">
+          <h2 class="page-header">
+             Registro de Visita à Igreja
+          </h2>
+      </div>
+  </div>
+
 
 <%= render @visitouigreja %>
 
-<div>
-  <%= link_to "Edit this visitouigreja", edit_visitouigreja_path(@visitouigreja) %> |
-  <%= link_to "Back to visitouigrejas", visitouigrejas_path %>
-
-  <%= button_to "Destroy this visitouigreja", @visitouigreja, method: :delete %>
+  <div class="row">
+    <div class="col-lg-2 form-group">
+      <%= link_to 'Alterar', edit_visitouigreja_path(@visitouigreja), :class => "btn btn-primary colorprimarybtn" %>
+     </div>
+    <div class="col-lg-2 form-group">      
+      <%= link_to 'Voltar',  visitouigrejas_path, :class => "btn btn-primary colorprimarybtn"%>
+    </div>
+  </div>
 </div>

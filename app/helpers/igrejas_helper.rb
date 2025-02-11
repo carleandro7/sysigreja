@@ -1,5 +1,5 @@
 module IgrejasHelper
   def listIgrejasAll
-    @igrejas = Igreja.all
+    @igrejas = Igreja.all.order(:nome)
   end
 end
