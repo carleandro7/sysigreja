@@ -1,0 +1,27 @@
+<%= form_with(model: estudobiblico) do |form| %>
+  <% if estudobiblico.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(estudobiblico.errors.count, "error") %> prohibited this estudobiblico from being saved:</h2>
+
+      <ul>
+        <% estudobiblico.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :nome, style: "display: block" %>
+    <%= form.text_field :nome %>
+  </div>
+
+  <div>
+    <%= form.label :descricao, style: "display: block" %>
+    <%= form.text_field :descricao %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,37 @@
+<%= form_with(model: visitouigreja) do |form| %>
+  <% if visitouigreja.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(visitouigreja.errors.count, "error") %> prohibited this visitouigreja from being saved:</h2>
+
+      <ul>
+        <% visitouigreja.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :igreja_id, style: "display: block" %>
+    <%= form.text_field :igreja_id %>
+  </div>
+
+  <div>
+    <%= form.label :visitaigreja_id, style: "display: block" %>
+    <%= form.text_field :visitaigreja_id %>
+  </div>
+
+  <div>
+    <%= form.label :data, style: "display: block" %>
+    <%= form.date_field :data %>
+  </div>
+
+  <div>
+    <%= form.label :descricao, style: "display: block" %>
+    <%= form.text_field :descricao %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

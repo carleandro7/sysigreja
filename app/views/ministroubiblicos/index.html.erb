@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Ministroubiblicos</h1>
+
+<div id="ministroubiblicos">
+  <% @ministroubiblicos.each do |ministroubiblico| %>
+    <%= render ministroubiblico %>
+    <p>
+      <%= link_to "Show this ministroubiblico", ministroubiblico %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New ministroubiblico", new_ministroubiblico_path %>

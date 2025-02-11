@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @visitabiblico %>
+
+<div>
+  <%= link_to "Edit this visitabiblico", edit_visitabiblico_path(@visitabiblico) %> |
+  <%= link_to "Back to visitabiblicos", visitabiblicos_path %>
+
+  <%= button_to "Destroy this visitabiblico", @visitabiblico, method: :delete %>
+</div>

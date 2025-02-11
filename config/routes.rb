@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :visitouigrejas
+  resources :ministroubiblicos
+  resources :visitabiblicos
+  resources :estudobiblicos
   resources :visitaigrejas
   devise_for :users , 
   controllers: { 

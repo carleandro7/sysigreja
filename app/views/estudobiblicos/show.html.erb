@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @estudobiblico %>
+
+<div>
+  <%= link_to "Edit this estudobiblico", edit_estudobiblico_path(@estudobiblico) %> |
+  <%= link_to "Back to estudobiblicos", estudobiblicos_path %>
+
+  <%= button_to "Destroy this estudobiblico", @estudobiblico, method: :delete %>
+</div>

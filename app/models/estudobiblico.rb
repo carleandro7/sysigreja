@@ -1,0 +1,2 @@
+class Estudobiblico < ApplicationRecord
+end

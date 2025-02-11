@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Estudobiblicos</h1>
+
+<div id="estudobiblicos">
+  <% @estudobiblicos.each do |estudobiblico| %>
+    <%= render estudobiblico %>
+    <p>
+      <%= link_to "Show this estudobiblico", estudobiblico %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New estudobiblico", new_estudobiblico_path %>
