@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :itemestudobiblicos
   resources :visitouigrejas
   resources :ministroubiblicos
   resources :visitabiblicos

@@ -1,12 +1,90 @@
-<div id="<%= dom_id estudobiblico %>">
-  <p>
-    <strong>Nome:</strong>
-    <%= estudobiblico.nome %>
-  </p>
 
-  <p>
-    <strong>Descricao:</strong>
-    <%= estudobiblico.descricao %>
-  </p>
+<div class="row">
+      
+      <div class="col-lg-8 form-group">
+        <label class='control-label'><%= t 'activerecord.attributes.estudobiblico.nome' %></label>
+        <input readonly="true" class='form-control' value="<%= @estudobiblico.nome %>" />
+      </div>
+    
+    <div class="col-lg-12 form-group">
+      <label class='control-label'><%= t 'activerecord.attributes.estudobiblico.descricao' %></label>
+      <input readonly="true" class='form-control' value="<%= @estudobiblico.descricao %>" />
+    </div>
+  </div>
 
+<div class="row">
+      <div class="col-lg-12">
+          <h4 class="page-header">
+         Estudos
+          </h4>
+      </div>
+  </div>
+
+<div class="table-responsive">
+  <table class="table table-hover table-striped" cellpadding="0" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Descrição</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @estudobiblico.itemestudobiblicos.each do |itemestudobiblico| %>
+        <tr>
+          <td><%= itemestudobiblico.descricao %></td>
+         <td>
+        <%= link_to "Excluir", itemestudobiblico_path(itemestudobiblico), method: :delete,remote: true, data: { turbo_method: :delete, turbo_confirm: "Tem certeza que deseja excluir esta pergunta?" }, class: "btn btn-danger btn-sm" %>
+</td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
+<div class="row">
+  <div class="col-lg-12">
+    <button type="button" class="btn btn-primary colorprimarybtn2" data-toggle="modal" data-target="#newQuestionModal">
+      Adicionar Estudo
+    </button>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="newQuestionModal" tabindex="-1" role="dialog" aria-labelledby="newQuestionModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document"> <!-- `modal-lg` torna o modal mais largo -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="newQuestionModalLabel">Novo Estudo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_with model: Itemestudobiblico.new, url: itemestudobiblicos_path(@questionariolote), method: :post, remote: true do |form| %>
+          <div class="form-group">
+            <%= form.label :descricao, "Descrição", class: "control-label" %>
+            <%= form.text_field :descricao, class: "form-control", required: true %>
+          </div>
+          <%= form.hidden_field :estudobiblico_id, value: @estudobiblico.id %>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary colorprimarybtn2" data-dismiss="modal">Cancelar</button>
+            <%= form.submit "Salvar Estudo", class: "btn btn-primary colorprimarybtn2" %>
+          </div>
+        <% end %>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+document.addEventListener("ajax:success", () => {
+  $('#newQuestionModal').modal('hide'); // Fecha o modal
+  location.reload(); // Recarrega a página
+});
+
+
+</script>
