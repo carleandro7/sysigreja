@@ -1,10 +1,22 @@
-<p style="color: green"><%= notice %></p>
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-lg-12">
+          <h2 class="page-header">
+             Igreja
+          </h2>
+      </div>
+  </div>
+
 
 <%= render @igreja %>
 
-<div>
-  <%= link_to "Edit this igreja", edit_igreja_path(@igreja) %> |
-  <%= link_to "Back to igrejas", igrejas_path %>
-
-  <%= button_to "Destroy this igreja", @igreja, method: :delete %>
+  <div class="row">
+    <div class="col-lg-3 form-group">
+      <%= link_to 'Alterar', edit_igreja_path(@igreja), :class => "btn btn-primary colorprimarybtn" %>
+     </div>
+    <div class="col-lg-3 form-group">      
+      <%= link_to 'Voltar',  igrejas_path, :class => "btn btn-primary colorprimarybtn"%>
+    </div>
+  </div>
 </div>

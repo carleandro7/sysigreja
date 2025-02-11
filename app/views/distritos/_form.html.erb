@@ -1,22 +1,40 @@
-<%= form_with(model: distrito) do |form| %>
-  <% if distrito.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(distrito.errors.count, "error") %> prohibited this distrito from being saved:</h2>
 
-      <ul>
-        <% distrito.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+
+<div class="distrito form">
+
+  <%= form_with(model: distrito, local: true) do |form| %>
+       <% if distrito.errors.any? %>
+
+         <div id="error_explanation" class="panel panel-danger mensagem-erro-cabecalho">
+           <div class="panel-heading">
+               <h3 class="panel-title"><%= pluralize(distrito.errors.count, "error(s)") %> ao salvar:</h3>
+            </div>
+           <div class="panel-body">
+             <ul>
+             <% distrito.errors.full_messages.each do |message| %>
+               <li><%= message %></li>
+             <% end %>
+             </ul>
+           </div>
+         </div>
+       <% end %>
+    
+    <div class="row">
+       <div class="col-lg-6 form-group">   
+           <%= form.label :nome, :class => 'control-label required' %>
+           <%= form.text_field :nome,  :class => 'form-control' %>
+       </div>
+       
     </div>
-  <% end %>
 
-  <div>
-    <%= form.label :nome, style: "display: block" %>
-    <%= form.text_field :nome %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+    
+      <div class="row">
+          <div class="col-lg-3 form-group">  
+            <input type="submit" name="commit" class="btn btn-primary colorprimarybtn" value="Salvar" data-disable-with="Salvando" />
+           </div>
+          <div class="col-lg-3 form-group">      
+            <%= link_to 'Voltar', distritos_path, :class => "btn btn-primary colorprimarybtn"%>
+          </div>
+      </div>
+   <% end %>                         
+</div>

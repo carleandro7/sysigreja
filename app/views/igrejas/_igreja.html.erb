@@ -1,12 +1,14 @@
-<div id="<%= dom_id igreja %>">
-  <p>
-    <strong>Nome:</strong>
-    <%= igreja.nome %>
-  </p>
 
-  <p>
-    <strong>Distrito:</strong>
-    <%= igreja.distrito_id %>
-  </p>
 
+  <div class="row">
+     <div class="col-lg-6 form-group">
+         <label class = 'control-label'><%= t 'activerecord.attributes.igreja.nome' %></label>
+        <input readonly="true" class = 'form-control' value="<%= @igreja.nome %>" />
+     </div>
+      <div class="col-lg-5 form-group">
+         <label class = 'control-label'><%= t 'activerecord.attributes.igreja.distrito' %></label>
+        <input readonly="true" class = 'form-control' value="<%= @igreja.distrito.nome %>" />
+     </div>
+    
 </div>
+

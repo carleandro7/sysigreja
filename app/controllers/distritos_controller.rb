@@ -3,7 +3,12 @@ class DistritosController < ApplicationController
 
   # GET /distritos or /distritos.json
   def index
-    @distritos = Distrito.all
+    if params[:nome] == nil
+      @distritos = Distrito.all.order("distritos.nome ASC").page(params[:page]).per(20)
+    else
+      @distritos = Distrito.all
+      .where("distritos.nome ILIKE  '%#{params[:nome].strip}%'").order("distritos.nome ASC").page(params[:page]).per(20)
+    end
   end
 
   # GET /distritos/1 or /distritos/1.json
@@ -25,7 +30,7 @@ class DistritosController < ApplicationController
 
     respond_to do |format|
       if @distrito.save
-        format.html { redirect_to @distrito, notice: "Distrito was successfully created." }
+        format.html { redirect_to @distrito, notice:  mensagem_usuario("salvo")}
         format.json { render :show, status: :created, location: @distrito }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +43,7 @@ class DistritosController < ApplicationController
   def update
     respond_to do |format|
       if @distrito.update(distrito_params)
-        format.html { redirect_to @distrito, notice: "Distrito was successfully updated." }
+        format.html { redirect_to @distrito, notice:  mensagem_usuario("alterado")}
         format.json { render :show, status: :ok, location: @distrito }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +57,7 @@ class DistritosController < ApplicationController
     @distrito.destroy!
 
     respond_to do |format|
-      format.html { redirect_to distritos_path, status: :see_other, notice: "Distrito was successfully destroyed." }
+      format.html { redirect_to distritos_path, status: :see_other, notice:  mensagem_usuario("excluido") }
       format.json { head :no_content }
     end
   end

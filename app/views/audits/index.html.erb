@@ -1,0 +1,71 @@
+<%
+(((params[:nome] != nil) and (params[:nome] != "")) ? nome = params[:nome] : nome = "0")
+(params[:modelnome] != nil ? modelnome = params[:modelnome] : modelnome = 0)
+%>
+ <div class="categdespesas index">
+      <h2>Auditoria </h2>
+       <%= form_tag audits_path( format:"html"), :method => 'get' do %>  
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-5  form-group">  
+                      <%= text_field_tag :nome, params[:nome], :class => 'form-control', :placeholder=>"Pesquisar" %>  
+                    </div>
+                    <div class="col-lg-4  form-group">  
+                        <select id="modelnome" name="modelnome" class="form-control">
+                            <option value="0">Todas as tabelas</option>
+                            <% @models.each do |model| %>
+                              <option value="<%= model.nome_model %>" <% if params[:modelnome] == model.nome_model %> selected <% end %> > <%= model.nome_model %></option>
+                            <% end %>         
+                        </select> 
+                    </div> 
+                    <div class="col-lg-3 form-group">
+                        <%= submit_tag "Pesquisar", :class => "btn btn-primary colorprimarybtn2" %>
+                    </div>  
+                    <div class="col-lg-4 form-group">  
+                      <%= link_to 'Relatório de Auditoria', relatorio_audits_path(modelnome, nome, format: 'pdf'), :class => "btn btn-primary colorprimarybtn2" %>
+                    </div>  
+              </div>    
+            </div>
+          </div>
+      <% end  %>     
+      
+  <div class="table-responsive">
+    <table class="table table-hover table-striped" cellpadding="0" cellspacing="0">
+        <thead>
+           <tr>
+            <th>Nome</th>
+            <th>Tabela</th>
+            <th>Ação</th>
+            <th>Dados</th>
+           </tr>
+        </thead>
+        <tbody>
+          <% 
+           if @audits != nil
+               @audits.each do |audit| %>
+            <tr>
+              <td><%= audit.username %>&nbsp;</td>
+              <td><%= audit.auditable_type %>&nbsp;</td>
+              <td><%= 
+               case audit.action
+                  when "create"
+                     "Criou"
+                  when "destroy"
+                     "Excluiu"
+                  when "update"
+                     "Atualizou"
+                end              
+              %></td>
+              <td><%= audit.audited_changes.gsub("-", " ") %>&nbsp;</td>           
+            </tr>
+          <% 
+            end
+          end %>
+      </tbody>
+    </table>
+ </div>
+  <% if @audits != nil %>
+    <%= paginate @audits %>
+  <% end %>
+</div>

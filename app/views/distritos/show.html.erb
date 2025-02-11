@@ -1,10 +1,22 @@
-<p style="color: green"><%= notice %></p>
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-lg-12">
+          <h2 class="page-header">
+             Distrito
+          </h2>
+      </div>
+  </div>
+
 
 <%= render @distrito %>
 
-<div>
-  <%= link_to "Edit this distrito", edit_distrito_path(@distrito) %> |
-  <%= link_to "Back to distritos", distritos_path %>
-
-  <%= button_to "Destroy this distrito", @distrito, method: :delete %>
+  <div class="row">
+    <div class="col-lg-3 form-group">
+      <%= link_to 'Alterar', edit_distrito_path(@distrito), :class => "btn btn-primary colorprimarybtn" %>
+     </div>
+    <div class="col-lg-3 form-group">      
+      <%= link_to 'Voltar',  distritos_path, :class => "btn btn-primary colorprimarybtn"%>
+    </div>
+  </div>
 </div>
