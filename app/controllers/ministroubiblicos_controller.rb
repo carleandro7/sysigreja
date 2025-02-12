@@ -25,7 +25,7 @@ class MinistroubiblicosController < ApplicationController
 
     respond_to do |format|
       if @ministroubiblico.save
-        format.html { redirect_to @ministroubiblico, notice: "Ministroubiblico was successfully created." }
+        format.html { redirect_to @ministroubiblico, notice: mensagem_usuario("salvo")  }
         format.json { render :show, status: :created, location: @ministroubiblico }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class MinistroubiblicosController < ApplicationController
   def update
     respond_to do |format|
       if @ministroubiblico.update(ministroubiblico_params)
-        format.html { redirect_to @ministroubiblico, notice: "Ministroubiblico was successfully updated." }
+        format.html { redirect_to @ministroubiblico, notice: mensagem_usuario("alterado")  }
         format.json { render :show, status: :ok, location: @ministroubiblico }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class MinistroubiblicosController < ApplicationController
     @ministroubiblico.destroy!
 
     respond_to do |format|
-      format.html { redirect_to ministroubiblicos_path, status: :see_other, notice: "Ministroubiblico was successfully destroyed." }
+      format.html { redirect_to ministroubiblicos_path, status: :see_other, notice: mensagem_usuario("excluido")  }
       format.json { head :no_content }
     end
   end
