@@ -1,0 +1,14 @@
+<div class="nested-fields">
+
+   <div class="row"> 
+       <div class="col-lg-8 form-group">
+        <%= f.collection_select :user_id, listUsersAll.all, :id, :nome, { prompt: "Selecionar" }, { class: "form-control", required: true } %>
+      </div>
+
+      <div class="col-lg-2 form-group"> 
+       <%= link_to_remove_association "Remover", f, class: "btn btn-info colorprimarybtn2" %>
+     </div>  
+   </div>
+ 	
+
+</div>

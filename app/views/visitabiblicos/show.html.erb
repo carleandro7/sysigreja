@@ -1,10 +1,23 @@
-<p style="color: green"><%= notice %></p>
+
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-lg-12">
+          <h2 class="page-header">
+              Estudo Bíblico
+          </h2>
+      </div>
+  </div>
+
 
 <%= render @visitabiblico %>
 
-<div>
-  <%= link_to "Edit this visitabiblico", edit_visitabiblico_path(@visitabiblico) %> |
-  <%= link_to "Back to visitabiblicos", visitabiblicos_path %>
-
-  <%= button_to "Destroy this visitabiblico", @visitabiblico, method: :delete %>
+  <div class="row">
+    <div class="col-lg-2 form-group">
+      <%= link_to 'Alterar', edit_visitabiblico_path(@visitabiblico), :class => "btn btn-primary colorprimarybtn" %>
+    </div>
+    <div class="col-lg-2 form-group">
+      <%= link_to 'Voltar',  visitabiblicos_path, :class => "btn btn-primary colorprimarybtn"%>
+    </div>
+  </div>
 </div>

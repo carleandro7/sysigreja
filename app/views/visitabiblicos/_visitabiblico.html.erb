@@ -1,27 +1,56 @@
-<div id="<%= dom_id visitabiblico %>">
-  <p>
-    <strong>Visitaigreja:</strong>
-    <%= visitabiblico.visitaigreja_id %>
-  </p>
 
-  <p>
-    <strong>Estudobiblico:</strong>
-    <%= visitabiblico.estudobiblico_id %>
-  </p>
+<div class="row">
+      
+      <div class="col-lg-5 form-group">
+        <label class='control-label'><%= t 'activerecord.attributes.visitabiblico.visitaigreja_id' %></label>
+        <input readonly="true" class='form-control' value="<%= @visitabiblico.visitaigreja.nome %>" />
+      </div>
+      <div class="col-lg-7 form-group">
+        <label class='control-label'><%= t 'activerecord.attributes.visitabiblico.estudobiblico_id' %></label>
+        <input readonly="true" class='form-control' value="<%= @visitabiblico.estudobiblico.nome %>" />
+      </div>
+      <div class="col-lg-3 form-group">
+        <label class='control-label'><%= t 'activerecord.attributes.visitabiblico.data_inicio' %></label>
+        <input readonly="true" class='form-control' value="<%= @visitabiblico.data_inicio.strftime("%d/%m/%Y") %>" />
+      </div>
+      <div class="col-lg-3 form-group">
+        <label class='control-label'><%= t 'activerecord.attributes.visitabiblico.data_fim' %></label>
+        <input readonly="true" class='form-control' value="<%= (@visitabiblico.data_fim != nil ? @visitabiblico.data_fim.strftime("%d/%m/%Y") : '')%>" />
+      </div>
+    
+    <div class="col-lg-8 form-group">
+      <label class='control-label'><%= t 'activerecord.attributes.visitabiblico.descricao' %></label>
+      <input readonly="true" class='form-control' value="<%= @visitabiblico.descricao %>" />
+    </div>
+  </div>
+<% if !@visitabiblico.estudousers.empty? %>
+  <div class="row">
+        <div class="col-lg-10">
+            <h4 class="page-header">
+                Instrutores
+            </h4>
+             <hr/>
+        </div>
+    </div>
 
-  <p>
-    <strong>Data inicio:</strong>
-    <%= visitabiblico.data_inicio %>
-  </p>
+ <div class="table-responsive">
+  <table class="table table-hover table-striped" cellpadding="0" cellspacing="0">
+      <thead>
+      <tr>
+      <th>COD</th>
+      <th>Nome</th>
+    </tr>
+  </thead>
 
-  <p>
-    <strong>Data fim:</strong>
-    <%= visitabiblico.data_fim %>
-  </p>
-
-  <p>
-    <strong>Descricao:</strong>
-    <%= visitabiblico.descricao %>
-  </p>
-
+  <tbody>
+    <% @visitabiblico.estudousers.each do |estudouser| %>
+      <tr>
+        <td><%= "%06d"%estudouser.user.id %></td>
+        <td><%= estudouser.user.nome %></td>
+      </tr>
+    <% end %>
+      </tbody>
+  </table>
 </div>
+
+<%end%>

@@ -1,42 +1,71 @@
-<%= form_with(model: visitabiblico) do |form| %>
-  <% if visitabiblico.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(visitabiblico.errors.count, "error") %> prohibited this visitabiblico from being saved:</h2>
 
-      <ul>
-        <% visitabiblico.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+
+
+<div class="visitabiblico form">
+  <%= form_with(model: visitabiblico, local: true) do |form| %>
+    <% if visitabiblico.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(visitabiblico.errors.count, "erro") %> ao salvar:</h4>
+        <ul>
+          <% visitabiblico.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-lg-5 form-group">
+        <%= form.label :visitaigreja_id, class: "control-label required" %>
+        <%= form.collection_select :visitaigreja_id, listVisitaigrejasAll, :id, :nome, { prompt: "Selecionar" }, { class: "form-control", required: true } %>
+      </div>
+      <div class="col-lg-7 form-group">
+        <%= form.label :estudobiblico_id, class: "control-label required" %>
+        <%= form.collection_select :estudobiblico_id, listEstudobiblicosAll, :id, :nome, { prompt: "Selecionar" }, { class: "form-control", required: true } %>
+      </div>
+      <div class="col-lg-3 form-group">
+        <%= form.label :data_inicio, class: "control-label required" %>
+        <%= form.date_field :data_inicio, class: "form-control", required: true %>
+      </div>
+      <div class="col-lg-3 form-group">
+        <%= form.label :data_fim, class: "control-label" %>
+        <%= form.date_field :data_fim, class: "form-control" %>
+      </div>
+      <div class="col-lg-8 form-group">   
+           <%= form.label :descricao, :class => 'control-label ' %>
+           <%= form.text_field :descricao,  :class => 'form-control' %>
+       </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10">
+            <h4 class="page-header">
+                Instrutores
+            </h4>
+             <hr/>
+        </div>
+    </div>
+    
+   
+    <div id="estudousers">
+        <%= form.fields_for :estudousers do |estudouser| %>
+        <%= render 'estudouser_fields', f: estudouser %>
+          <%end%>
+      <div>
+        <%= link_to_add_association 'Adicionar Instrutor', form, :estudousers, class: "btn btn-info colorprimarybtn2"  %>
+      </div>
+    </div>
+     <br>
+
+
+    <div class="row">
+      <div class="col-lg-2 form-group">
+        <%= form.submit "Salvar", class: "btn btn-info colorprimarybtn" %>
+      </div>
+      <div class="col-lg-2 form-group">
+        <%= link_to "Voltar", visitabiblicos_path, class: "btn btn-info colorprimarybtn" %>
+      </div>
     </div>
   <% end %>
+</div>
 
-  <div>
-    <%= form.label :visitaigreja_id, style: "display: block" %>
-    <%= form.text_field :visitaigreja_id %>
-  </div>
-
-  <div>
-    <%= form.label :estudobiblico_id, style: "display: block" %>
-    <%= form.text_field :estudobiblico_id %>
-  </div>
-
-  <div>
-    <%= form.label :data_inicio, style: "display: block" %>
-    <%= form.date_field :data_inicio %>
-  </div>
-
-  <div>
-    <%= form.label :data_fim, style: "display: block" %>
-    <%= form.date_field :data_fim %>
-  </div>
-
-  <div>
-    <%= form.label :descricao, style: "display: block" %>
-    <%= form.text_area :descricao %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>

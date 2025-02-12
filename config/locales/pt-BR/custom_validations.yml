@@ -36,4 +36,12 @@ pt-BR:
         descricao: "Descrição"
       estudobiblico:
         descricao: "Descrição"
+      visitabiblico:
+        visitaigreja_id: "Visita"
+        visitaigreja: "Visita"
+        estudobiblico_id: "Estudo Bíblico"
+        estudobiblico: "Estudo Bíblico"
+        data_inicio: "Data de Início"
+        data_fim: "Data de Fim"
+        descricao: "Descrição"
   
