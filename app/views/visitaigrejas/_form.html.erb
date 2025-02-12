@@ -52,12 +52,14 @@
         <%= form.label :estado, class: "control-label required" %>
         <%= form.select :estado, list_estados, { include_blank: "Selecionar" }, { class: "form-control" } %>
       </div>
+      <div class="col-lg-3 form-group">
+        <%= form.label :data_nasc, class: "control-label required" %>
+        <%= form.date_field :data_nasc, class: "form-control" %>
+      </div>
       <div class="col-lg-5 form-group">
         <%= form.label :igreja_id, class: "control-label required" %>
         <%= form.collection_select :igreja_id, listIgrejasAll.all, :id, :nome, { prompt: "Selecionar" }, { class: "form-control", required: true } %>
       </div>
-
-
     </div>
 
 

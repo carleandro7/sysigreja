@@ -39,6 +39,10 @@
       <label class='control-label'><%= t 'activerecord.attributes.visitaigreja.estado' %></label>
       <input readonly="true" class='form-control' value="<%= @visitaigreja.estado %>" />
     </div>
+    <div class="col-lg-3 form-group">
+        <label class='control-label'><%= t 'activerecord.attributes.visitaigreja.data_nasc' %></label>
+        <input readonly="true" class='form-control' value="<%= (@visitaigreja.data_nasc != nil ? @visitaigreja.data_nasc.strftime("%d/%m/%Y") : '')%>" />
+      </div>
     <div class="col-lg-4 form-group">
       <label class='control-label'><%= t 'activerecord.attributes.visitaigreja.igreja' %></label>
       <input readonly="true" class='form-control' value="<%= @visitaigreja.igreja.nome %>" />

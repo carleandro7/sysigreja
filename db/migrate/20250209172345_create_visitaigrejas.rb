@@ -14,6 +14,7 @@ class CreateVisitaigrejas < ActiveRecord::Migration[7.1]
       t.string :latitude
       t.string :longitude
       t.text :observacao
+      t.date :data_nasc
       t.references :igreja, null: false, foreign_key: true
 
       t.timestamps
