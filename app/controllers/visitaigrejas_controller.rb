@@ -70,6 +70,6 @@ class VisitaigrejasController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def visitaigreja_params
-      params.require(:visitaigreja).permit(:nome, :apelido, :telefone, :whatsapp_telefone, :cep, :logradouro, :numero, :bairro, :cidade, :estado, :latitude, :longitude, :observacao, :igreja_id)
+      params.require(:visitaigreja).permit(:nome, :apelido, :telefone, :whatsapp_telefone, :cep, :logradouro, :numero, :bairro, :cidade, :estado, :latitude, :longitude, :observacao, :data_nasc, :igreja_id)
     end
 end

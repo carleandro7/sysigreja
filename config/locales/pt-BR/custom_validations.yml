@@ -28,6 +28,7 @@ pt-BR:
         cep: "CEP"
         igreja_id: "Igreja"
         igreja: "Igreja"
+        data_nasc: "Data de Nascimento"
       visitouigreja:
         igreja_id: "Igreja"
         igreja: "Igreja"
