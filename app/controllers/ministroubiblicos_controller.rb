@@ -13,19 +13,39 @@ class MinistroubiblicosController < ApplicationController
   # GET /ministroubiblicos/new
   def new
     @ministroubiblico = Ministroubiblico.new(data: Time.zone.today)
-    # Buscar os usuários relacionados a um visitabiblico do usuário logado
-    users = User.joins(:estudousers).where(estudousers: { visitabiblico_id: current_user.estudousers.pluck(:visitabiblico_id) }).distinct
+  
+    # Buscar os usuários relacionados a um `visitabiblico` do usuário logado
+    users = User.joins(:estudousers)
+                .where(estudousers: { visitabiblico_id: current_user.estudousers.pluck(:visitabiblico_id) })
+                .distinct
   
     # Criar registros aninhados para cada usuário encontrado
     users.each do |user|
       @ministroubiblico.ministroubiblicousers.build(user: user)
     end
+  
+    # 🔥 Buscar todas as `visitaigrejas` associadas a um `visitabiblico` do usuário logado
+    @listVisitaigrejasAll = Visitaigreja.joins(:visitabiblicos)
+                                        .where(visitabiblicos: { id: current_user.estudousers.pluck(:visitabiblico_id) })
+                                        .distinct
   end
+  
   
   
   # GET /ministroubiblicos/1/edit
   def edit
+    # Buscar todas as `visitaigrejas` associadas ao `@ministroubiblico`
+    visitaigrejas_existentes = @ministroubiblico.estudoministrados.pluck(:visitaigreja_id)
+  
+    # Buscar todas as `visitaigrejas` que o usuário logado tem acesso via `visitabiblico`
+    visitaigrejas_permitidas = Visitaigreja.joins(:visitabiblicos)
+                                           .where(visitabiblicos: { id: current_user.estudousers.pluck(:visitabiblico_id) })
+                                           .pluck(:id)
+    #   1. `visitaigrejas` já associadas ao `@ministroubiblico`
+    #   2. `visitaigrejas` que o usuário pode adicionar
+    @listVisitaigrejasAll = Visitaigreja.where(id: visitaigrejas_existentes + visitaigrejas_permitidas).distinct
   end
+  
 
   # POST /ministroubiblicos or /ministroubiblicos.json
   def create

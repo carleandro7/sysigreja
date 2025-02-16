@@ -37,7 +37,7 @@
       <tr>
         <td><%= "%06d"%ministroubiblico.id %></td>
         <td><%= ministroubiblico.estudobiblico.nome %></td>
-        <td><%= ministroubiblico.conteudo %></td>
+        <td><%= ministroubiblico.itemestudobiblico.descricao %></td>
         <td><%= ministroubiblico.user.nome %></td>
         <td><%= ministroubiblico.data.strftime("%d/%m/%Y") %></td>
         <td><%= link_to 'Visualizar', ministroubiblico %></td>

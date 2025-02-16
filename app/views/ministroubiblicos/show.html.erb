@@ -1,10 +1,22 @@
-<p style="color: green"><%= notice %></p>
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-lg-12">
+          <h2 class="page-header">
+              Estudo Ministrado
+          </h2>
+      </div>
+  </div>
+
 
 <%= render @ministroubiblico %>
 
-<div>
-  <%= link_to "Edit this ministroubiblico", edit_ministroubiblico_path(@ministroubiblico) %> |
-  <%= link_to "Back to ministroubiblicos", ministroubiblicos_path %>
-
-  <%= button_to "Destroy this ministroubiblico", @ministroubiblico, method: :delete %>
+  <div class="row">
+    <div class="col-lg-2 form-group">
+      <%= link_to 'Alterar', edit_ministroubiblico_path(@ministroubiblico), :class => "btn btn-primary colorprimarybtn" %>
+    </div>
+    <div class="col-lg-2 form-group">
+      <%= link_to 'Voltar',  ministroubiblicos_path, :class => "btn btn-primary colorprimarybtn"%>
+    </div>
+  </div>
 </div>

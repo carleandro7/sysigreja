@@ -22,11 +22,11 @@
         <%= form.label :data, class: "control-label required" %>
         <%= form.date_field :data, class: "form-control", required: true %>
       </div>
-       <div class="col-lg-7 form-group">
+       <div class="col-lg-6 form-group">
         <%= form.label :estudobiblico_id, class: "control-label required" %>
         <%= form.collection_select :estudobiblico_id, listEstudobiblicosAll, :id, :nome, { prompt: "Selecionar" }, { class: "form-control", required: true } %>
       </div>
-      <div class="col-lg-7 form-group">
+      <div class="col-lg-6 form-group">
         <%= form.label :itemestudobiblico_id, class: "control-label" %>
         <%= form.collection_select :itemestudobiblico_id, listEstudobiblicosAll, :id, :nome, 
           { prompt: "Selecionar" },
@@ -64,7 +64,7 @@
 </div>
 
 <div id="estudoministrados">
-  <% listVisitaigrejasAll.each do |visitaigreja| %>
+  <% @listVisitaigrejasAll.each do |visitaigreja| %>
     <% estudoministrado = @ministroubiblico.estudoministrados.find { |e| e.visitaigreja_id == visitaigreja.id } || @ministroubiblico.estudoministrados.build(visitaigreja_id: visitaigreja.id) %>
     
     <div class="row">

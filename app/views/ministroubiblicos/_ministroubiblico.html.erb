@@ -1,0 +1,62 @@
+
+<div class="row">
+      <div class="col-lg-5 form-group">
+        <label class='control-label'><%= t 'activerecord.attributes.ministroubiblico.igreja' %></label>
+        <input readonly="true" class='form-control' value="<%= @ministroubiblico.igreja.nome %>" />
+      </div>
+    
+    <div class="col-lg-3 form-group">
+      <label class='control-label'><%= t 'activerecord.attributes.ministroubiblico.data' %></label>
+      <input readonly="true" class='form-control' value="<%= @ministroubiblico.data.strftime('%d/%m/%Y') %>" />
+    </div>
+     <div class="col-lg-6 form-group">
+      <label class='control-label'><%= t 'activerecord.attributes.ministroubiblico.estudobiblico' %></label>
+      <input readonly="true" class='form-control' value="<%= @ministroubiblico.estudobiblico.nome %>" />
+    </div>
+     <div class="col-lg-6 form-group">
+      <label class='control-label'><%= t 'activerecord.attributes.ministroubiblico.itemestudobiblico' %></label>
+      <input readonly="true" class='form-control' value="<%= @ministroubiblico.itemestudobiblico.descricao %>" />
+    </div>
+    <div class="col-lg-5 form-group">
+      <label class='control-label'>Cadastrou o Estudo</label>
+      <input readonly="true" class='form-control' value="<%= @ministroubiblico.user.nome %>" />
+    </div>
+  </div>
+
+   <div class="row">
+        <div class="col-lg-10">
+            <h4 class="page-header">
+                Instrutores
+            </h4>
+             <hr/>
+        </div>
+    </div>
+
+    <div class="row">
+      <% @ministroubiblico.ministroubiblicousers.each do |ministroubiblicouser| %>
+      <div class="col-lg-5 form-group">
+        <input readonly="true" class='form-control' value="<%= ministroubiblicouser.user.nome %>" />
+      </div>
+      <%end%>
+    
+  </div>
+<br>
+  <div class="row">
+        <div class="col-lg-10">
+            <h4 class="page-header">
+                Estudantes da Bíblia
+            </h4>
+             <hr/>
+        </div>
+    </div>
+
+    <div class="row">
+      <% @ministroubiblico.estudoministrados.each do |estudoministrado| %>
+      <div class="col-lg-5 form-group">
+        <input readonly="true" class='form-control' value="<%= estudoministrado.visitaigreja.nome %>" />
+      </div>
+      <%end%>
+    
+  </div>
+    
+    
