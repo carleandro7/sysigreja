@@ -30,13 +30,8 @@
         <%= form.label :itemestudobiblico_id, class: "control-label" %>
         <%= form.collection_select :itemestudobiblico_id, listEstudobiblicosAll, :id, :nome, 
           { prompt: "Selecionar" },
-          { class: "form-control", id: "itemestudobiblico_select", onchange: "atualizarConteudo()" } %>
+          { class: "form-control", id: "itemestudobiblico_select"} %>
 
-      </div>
-
-      <div class="col-lg-7 form-group">
-        <%= form.label :conteudo, class: "control-label required" %>
-        <%= form.text_field :conteudo, class: "form-control", required: true, id: "conteudo_text" %>
       </div>
 
     </div>
@@ -70,17 +65,20 @@
 
 <div id="estudoministrados">
   <% listVisitaigrejasAll.each do |visitaigreja| %>
-    <%= form.fields_for :estudoministrados, @ministroubiblico.estudoministrados.build do |estudoministrado_form| %>
-      <div class="row">
-        <div class="col-lg-12 form-group">
-          <%= estudoministrado_form.hidden_field :visitaigreja_id, value: visitaigreja.id %>
-          <%= estudoministrado_form.check_box :_destroy, class: "", checked: false %>
+    <% estudoministrado = @ministroubiblico.estudoministrados.find { |e| e.visitaigreja_id == visitaigreja.id } || @ministroubiblico.estudoministrados.build(visitaigreja_id: visitaigreja.id) %>
+    
+    <div class="row">
+      <div class="col-lg-12 form-group">
+        <%= form.fields_for :estudoministrados, estudoministrado do |estudoministrado_form| %>
+          <%= estudoministrado_form.hidden_field :visitaigreja_id %>
+          <%= estudoministrado_form.check_box :_sava_visita, { class: "", checked: estudoministrado.persisted? } %>
           <%= estudoministrado_form.label :_destroy, visitaigreja.nome, class: "control-label" %>
-        </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   <% end %>
 </div>
+
 
 
 
@@ -95,28 +93,4 @@
     </div>
   <% end %>
 </div>
-
-<script>
-  function atualizarConteudo() {
-    const itemSelect = document.getElementById("itemestudobiblico_select");
-    const conteudoField = document.getElementById("conteudo_text");
-
-    if (!itemSelect || !conteudoField) {
-      console.warn("Elemento não encontrado");
-      return;
-    }
-
-    const selectedOption = itemSelect.options[itemSelect.selectedIndex];
-
-    if (selectedOption) {
-      conteudoField.value = selectedOption.text;
-      console.log("Conteúdo atualizado:", selectedOption.text);
-    }
-  }
-
-  // Garante que a função é reanexada ao Turbo
-  document.addEventListener("turbo:load", function () {
-    atualizarConteudo(); // Para garantir a inicialização
-  });
-</script>
 

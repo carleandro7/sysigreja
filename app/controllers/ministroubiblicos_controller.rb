@@ -30,13 +30,18 @@ class MinistroubiblicosController < ApplicationController
   # POST /ministroubiblicos or /ministroubiblicos.json
   def create
     @ministroubiblico = Ministroubiblico.new(ministroubiblico_params)
-    @ministroubiblico.estudoministrados.each do |estudo|
-      estudo.mark_for_destruction unless params[:ministroubiblico][:estudoministrados_attributes].values.any? { |e| e["visitaigreja_id"] == estudo.visitaigreja_id.to_s && e["_destroy"] == "1" }
-    end
     @ministroubiblico.user_id = current_user.id
+  
+    # 🔥 Remover os estudoministrados que foram desmarcados (`_destroy = "0"`)
+    @ministroubiblico.estudoministrados.each do |estudo|
+      if params[:ministroubiblico][:estudoministrados_attributes].values.any? { |e| e["visitaigreja_id"] == estudo.visitaigreja_id.to_s && e["_sava_visita"] == "0" }
+        estudo.mark_for_destruction
+      end
+    end
+  
     respond_to do |format|
       if @ministroubiblico.save
-        format.html { redirect_to @ministroubiblico, notice: mensagem_usuario("salvo")  }
+        format.html { redirect_to @ministroubiblico, notice: mensagem_usuario("salvo") }
         format.json { render :show, status: :created, location: @ministroubiblico }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -44,12 +49,23 @@ class MinistroubiblicosController < ApplicationController
       end
     end
   end
+  
+  
 
   # PATCH/PUT /ministroubiblicos/1 or /ministroubiblicos/1.json
   def update
     respond_to do |format|
       if @ministroubiblico.update(ministroubiblico_params)
-        format.html { redirect_to @ministroubiblico, notice: mensagem_usuario("alterado")  }
+        # 🔥 Remover os `estudoministrados` que foram desmarcados (`_sava_visita = "0"`)
+        @ministroubiblico.estudoministrados.each do |estudo|
+          if params[:ministroubiblico][:estudoministrados_attributes].values.any? { |e| e["visitaigreja_id"] == estudo.visitaigreja_id.to_s && e["_sava_visita"] == "0" }
+            estudo.mark_for_destruction
+          end
+        end
+  
+        @ministroubiblico.save # 🔥 Salva as mudanças, removendo os `estudoministrados` desmarcados
+  
+        format.html { redirect_to @ministroubiblico, notice: mensagem_usuario("atualizado") }
         format.json { render :show, status: :ok, location: @ministroubiblico }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -57,6 +73,7 @@ class MinistroubiblicosController < ApplicationController
       end
     end
   end
+  
 
   # DELETE /ministroubiblicos/1 or /ministroubiblicos/1.json
   def destroy
@@ -78,6 +95,6 @@ class MinistroubiblicosController < ApplicationController
     def ministroubiblico_params
       params.require(:ministroubiblico).permit(:conteudo, :data, :igreja_id, :estudobiblico_id, :itemestudobiblico_id, :user_id,
       ministroubiblicousers_attributes: [:id, :user_id, :_destroy],
-      estudoministrados_attributes: [:id, :visitaigreja_id, :_destroy])
+      estudoministrados_attributes: [:id, :visitaigreja_id, :_sava_visita, :_destroy])
     end
 end
