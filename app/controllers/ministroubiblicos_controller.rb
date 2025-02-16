@@ -12,9 +12,17 @@ class MinistroubiblicosController < ApplicationController
 
   # GET /ministroubiblicos/new
   def new
-    @ministroubiblico = Ministroubiblico.new
+    @ministroubiblico = Ministroubiblico.new(data: Time.zone.today)
+    # Buscar os usuários relacionados a um visitabiblico do usuário logado
+    users = User.joins(:estudousers).where(estudousers: { visitabiblico_id: current_user.estudousers.pluck(:visitabiblico_id) }).distinct
+  
+    # Criar registros aninhados para cada usuário encontrado
+    users.each do |user|
+      @ministroubiblico.ministroubiblicousers.build(user: user)
+    end
   end
-
+  
+  
   # GET /ministroubiblicos/1/edit
   def edit
   end
@@ -22,7 +30,10 @@ class MinistroubiblicosController < ApplicationController
   # POST /ministroubiblicos or /ministroubiblicos.json
   def create
     @ministroubiblico = Ministroubiblico.new(ministroubiblico_params)
-
+    @ministroubiblico.estudoministrados.each do |estudo|
+      estudo.mark_for_destruction unless params[:ministroubiblico][:estudoministrados_attributes].values.any? { |e| e["visitaigreja_id"] == estudo.visitaigreja_id.to_s && e["_destroy"] == "1" }
+    end
+    @ministroubiblico.user_id = current_user.id
     respond_to do |format|
       if @ministroubiblico.save
         format.html { redirect_to @ministroubiblico, notice: mensagem_usuario("salvo")  }
@@ -65,6 +76,8 @@ class MinistroubiblicosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def ministroubiblico_params
-      params.require(:ministroubiblico).permit(:conteudo, :data, :visitaigreja_id, :visitabiblico_id, :estudobiblico_id, :itemestudobiblico_id)
+      params.require(:ministroubiblico).permit(:conteudo, :data, :igreja_id, :estudobiblico_id, :itemestudobiblico_id, :user_id,
+      ministroubiblicousers_attributes: [:id, :user_id, :_destroy],
+      estudoministrados_attributes: [:id, :visitaigreja_id, :_destroy])
     end
 end

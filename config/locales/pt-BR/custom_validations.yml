@@ -44,4 +44,14 @@ pt-BR:
         data_inicio: "Data de Início"
         data_fim: "Data de Fim"
         descricao: "Descrição"
+      ministroubiblico:
+        visitaigreja_id: "Visita"
+        visitaigreja: "Visita"
+        estudobiblico_id: "Estudo Bíblico"
+        estudobiblico: "Estudo Bíblico"
+        itemestudobiblico: "Item do Estudo"
+        itemestudobiblico_id: "Item do Estudo"
+        conteudo: "Conteúdo"
+        user: "Membro"
+        user_id: "Membro"
   

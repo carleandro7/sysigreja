@@ -71,7 +71,7 @@ class VisitabiblicosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def visitabiblico_params
-      params.require(:visitabiblico).permit(:visitaigreja_id, :estudobiblico_id, :data_inicio, :data_fim, :descricao,
+      params.require(:visitabiblico).permit(:igreja_id, :visitaigreja_id, :estudobiblico_id, :data_inicio, :data_fim, :descricao,
       estudousers_attributes: [:id, :user_id, :_destroy])
     end
 end

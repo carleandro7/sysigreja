@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_11_174014) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_16_112939) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_11_174014) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "estudoministrados", force: :cascade do |t|
+    t.bigint "ministroubiblico_id", null: false
+    t.bigint "visitaigreja_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ministroubiblico_id"], name: "index_estudoministrados_on_ministroubiblico_id"
+    t.index ["visitaigreja_id"], name: "index_estudoministrados_on_visitaigreja_id"
+  end
+
   create_table "estudousers", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "visitabiblico_id", null: false
@@ -77,16 +86,25 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_11_174014) do
   create_table "ministroubiblicos", force: :cascade do |t|
     t.string "conteudo"
     t.date "data"
-    t.bigint "visitaigreja_id", null: false
-    t.bigint "visitabiblico_id", null: false
     t.bigint "estudobiblico_id", null: false
-    t.bigint "itemestudobiblico_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "itemestudobiblico_id"
+    t.bigint "igreja_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["estudobiblico_id"], name: "index_ministroubiblicos_on_estudobiblico_id"
+    t.index ["igreja_id"], name: "index_ministroubiblicos_on_igreja_id"
     t.index ["itemestudobiblico_id"], name: "index_ministroubiblicos_on_itemestudobiblico_id"
-    t.index ["visitabiblico_id"], name: "index_ministroubiblicos_on_visitabiblico_id"
-    t.index ["visitaigreja_id"], name: "index_ministroubiblicos_on_visitaigreja_id"
+    t.index ["user_id"], name: "index_ministroubiblicos_on_user_id"
+  end
+
+  create_table "ministroubiblicousers", force: :cascade do |t|
+    t.bigint "ministroubiblico_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ministroubiblico_id"], name: "index_ministroubiblicousers_on_ministroubiblico_id"
+    t.index ["user_id"], name: "index_ministroubiblicousers_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -109,12 +127,14 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_11_174014) do
   create_table "visitabiblicos", force: :cascade do |t|
     t.bigint "visitaigreja_id", null: false
     t.bigint "estudobiblico_id", null: false
+    t.bigint "igreja_id", null: false
     t.date "data_inicio"
     t.date "data_fim"
     t.text "descricao"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["estudobiblico_id"], name: "index_visitabiblicos_on_estudobiblico_id"
+    t.index ["igreja_id"], name: "index_visitabiblicos_on_igreja_id"
     t.index ["visitaigreja_id"], name: "index_visitabiblicos_on_visitaigreja_id"
   end
 
@@ -149,16 +169,21 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_11_174014) do
     t.index ["visitaigreja_id"], name: "index_visitouigrejas_on_visitaigreja_id"
   end
 
+  add_foreign_key "estudoministrados", "ministroubiblicos"
+  add_foreign_key "estudoministrados", "visitaigrejas"
   add_foreign_key "estudousers", "users"
   add_foreign_key "estudousers", "visitabiblicos"
   add_foreign_key "igrejas", "distritos"
   add_foreign_key "itemestudobiblicos", "estudobiblicos"
   add_foreign_key "ministroubiblicos", "estudobiblicos"
+  add_foreign_key "ministroubiblicos", "igrejas"
   add_foreign_key "ministroubiblicos", "itemestudobiblicos"
-  add_foreign_key "ministroubiblicos", "visitabiblicos"
-  add_foreign_key "ministroubiblicos", "visitaigrejas"
+  add_foreign_key "ministroubiblicos", "users"
+  add_foreign_key "ministroubiblicousers", "ministroubiblicos"
+  add_foreign_key "ministroubiblicousers", "users"
   add_foreign_key "users", "igrejas"
   add_foreign_key "visitabiblicos", "estudobiblicos"
+  add_foreign_key "visitabiblicos", "igrejas"
   add_foreign_key "visitabiblicos", "visitaigrejas"
   add_foreign_key "visitaigrejas", "igrejas"
   add_foreign_key "visitouigrejas", "igrejas"

@@ -17,6 +17,10 @@
         <label class='control-label'><%= t 'activerecord.attributes.visitabiblico.data_fim' %></label>
         <input readonly="true" class='form-control' value="<%= (@visitabiblico.data_fim != nil ? @visitabiblico.data_fim.strftime("%d/%m/%Y") : '')%>" />
       </div>
+      <div class="col-lg-4 form-group">
+      <label class='control-label'><%= t 'activerecord.attributes.visitabiblico.igreja' %></label>
+      <input readonly="true" class='form-control' value="<%= @visitabiblico.igreja.nome %>" />
+    </div>
     
     <div class="col-lg-8 form-group">
       <label class='control-label'><%= t 'activerecord.attributes.visitabiblico.descricao' %></label>

@@ -31,6 +31,10 @@
         <%= form.label :data_fim, class: "control-label" %>
         <%= form.date_field :data_fim, class: "form-control" %>
       </div>
+      <div class="col-lg-5 form-group">
+        <%= form.label :igreja_id, class: "control-label required" %>
+        <%= form.collection_select :igreja_id, listIgrejasAll.all, :id, :nome, { prompt: "Selecionar" }, { class: "form-control", required: true } %>
+      </div>
       <div class="col-lg-8 form-group">   
            <%= form.label :descricao, :class => 'control-label ' %>
            <%= form.text_field :descricao,  :class => 'form-control' %>
