@@ -4,7 +4,11 @@ test:
 
 local:
   service: Disk
-  root: <%= Rails.root.join("storage") %>
+  root: <%= File.dirname("/home/dokku/imagens/sysigreja/file") %>
+
+localdevelopment:
+  service: Disk
+  root: <%= File.dirname("/home/ubuntu22/Desenvolvimento/railsproject/imagens/file") %>
 
 # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
